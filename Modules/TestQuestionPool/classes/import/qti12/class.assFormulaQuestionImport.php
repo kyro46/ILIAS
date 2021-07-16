@@ -63,9 +63,11 @@ class assFormulaQuestionImport extends assQuestionImport
                 $unit = $this->object->getUnitRepository()->getUnit($data["unitvalue"]);
                 require_once 'Modules/TestQuestionPool/classes/class.assFormulaQuestionResult.php';
                 if (!is_array($data["rating"])) {
-                    $resObj = new assFormulaQuestionResult($result, $data["rangemin"], $data["rangemax"], $data["tolerance"], $unit, $data["formula"], $data["points"], $data["precision"], true);
+                	$resObj = new assFormulaQuestionResult($result, $data["rangemin"], $data["rangemax"], $data["tolerance"], $unit, $data["formula"], $data["points"], $data["precision"], true);
+                	$resObj->setResultType($data['result_type']);
                 } else {
-                    $resObj = new assFormulaQuestionResult($result, $data["rangemin"], $data["rangemax"], $data["tolerance"], $unit, $data["formula"], $data["points"], $data["precision"], false, $data["rating"]["sign"], $data["rating"]["value"], $data["rating"]["unit"]);
+                	$resObj = new assFormulaQuestionResult($result, $data["rangemin"], $data["rangemax"], $data["tolerance"], $unit, $data["formula"], $data["points"], $data["precision"], false, $data["rating"]["sign"], $data["rating"]["value"], $data["rating"]["unit"]);
+                	$resObj->setResultType($data['result_type']);
                 }
                 $this->object->addResult($resObj);
                 if (is_array($data["resultunits"])) {
